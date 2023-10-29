@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.xzwebx</groupId>
 	<artifactId>HttpFilter</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0-RELEASE</version>
 	<name>HttpFilter</name>
 	<description>xzwebx httpfilter</description>
 	<url>https://github.com/xzwebx/java-httpfilter</url>
@@ -22,7 +22,7 @@
 
 		<gpg.passphrase>Yzhl@141592</gpg.passphrase>
 		<gpg.keyname>3EE41C318EB89B9CB37EC4EB9D568A56ECA7CA58</gpg.keyname>
-		<gpg.homedir>C:\Users\sur\AppData\Roaming\gnupg\pubring.kbx</gpg.homedir>
+		<gpg.homedir>C:\Users\sur\AppData\Roaming\gnupg</gpg.homedir>
 	</properties>
 	<licenses>
 		<license>
@@ -85,6 +85,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>none</mainClass>
+					<classifier>execute</classifier>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
