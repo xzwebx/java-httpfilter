@@ -2,19 +2,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+<!--    <dependencyManagement>-->
+<!--        <dependencies>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>1.5.4.RELEASE</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-dependencies</artifactId>-->
+<!--                <version>2.2.5.RELEASE</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--        </dependencies>-->
+<!--    </dependencyManagement>-->
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.1.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+<!--	<parent>-->
+<!--		<groupId>org.springframework.boot</groupId>-->
+<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
+<!--		<version>3.1.4</version>-->
+<!--		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+<!--	</parent>-->
 	<groupId>com.xzwebx</groupId>
 	<artifactId>HttpFilter</artifactId>
 	<version>1.1.1-RELEASE</version>
 	<name>HttpFilter</name>
+	<packaging>jar</packaging>
 	<description>xzwebx httpfilter</description>
 	<url>https://github.com/xzwebx/java-httpfilter</url>
 	<properties>
+		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+		<maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+		<maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+<!--		<nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>-->
+		<spring-boot.version>3.1.4</spring-boot.version>
+
+		<server.id.value>ossrh</server.id.value>
+
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -38,10 +70,8 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/xzwebx/java-httpfilter.git</connection>
-		<developerConnection>https://github.com/xzwebx/java-httpfilter</developerConnection>
-		<url>https://github.com/xzwebx/java-httpfilter.git</url>
-		<tag>v1.0.0</tag>
+		<url>https://github.com/xzwebx/java-httpfilter</url>
+		<connection>https://github.com/xzwebx/java-httpfilter.git</connection>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
@@ -82,6 +112,17 @@
 
 	<build>
 		<plugins>
+<!--			<plugin>-->
+<!--				<groupId>org.sonatype.plugins</groupId>-->
+<!--				<artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--				<version>1.6.7</version>-->
+<!--				<extensions>true</extensions>-->
+<!--				<configuration>-->
+<!--					<serverId>ossrh</serverId>-->
+<!--					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
+<!--					<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -111,26 +152,31 @@
 				<version>2.2.1</version>
 				<executions>
 					<execution>
-						<id>attach-sources</id>
+						<phase>package</phase>
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+
+			<!--生成doc jar包-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
+				<version>2.9.1</version>
+				<configuration>
+					<!-- jdk1.8要加上，1.7要去掉，否则会报错 -->
+					<additionalJOptions>
+						<additionalJOption>-Xdoclint:none</additionalJOption>
+					</additionalJOptions>
+				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
-						<configuration>
-							<additionalparam>-Xdoclint:none</additionalparam>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
