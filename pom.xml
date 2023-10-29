@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.xzwebx</groupId>
 	<artifactId>HttpFilter</artifactId>
-	<version>1.1.0-RELEASE</version>
+	<version>1.1.1-RELEASE</version>
 	<name>HttpFilter</name>
 	<description>xzwebx httpfilter</description>
 	<url>https://github.com/xzwebx/java-httpfilter</url>
